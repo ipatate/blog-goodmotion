@@ -1,0 +1,8 @@
+[ignore]
+<PROJECT_ROOT>/__tests__/.*
+[include]
+<PROJECT_ROOT>/src/*
+<PROJECT_ROOT>/server.js
+[libs]
+
+[options]
