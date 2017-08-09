@@ -13,6 +13,7 @@ results
 config/.env.developpement
 config/.env.production
 config/.env.test
+src/.next
 
 npm-debug.log
 node_modules
