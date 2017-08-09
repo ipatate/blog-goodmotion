@@ -2,11 +2,14 @@ const env = process.env.NODE_ENV || 'developpement';
 require('dotenv').config({path: `${__dirname}/config/.env.${env}`});
 const koa = require('koa');
 const Router = require('koa-router');
+const mobxReact = require('mobx-react')
 const next = require('next');
 const compress = require('koa-compress');
 const dev = env !== 'production';
 const app = next({ dir: './src', dev });
 const handle = app.getRequestHandler();
+
+mobxReact.useStaticRendering(true)
 
 app
   .prepare()
