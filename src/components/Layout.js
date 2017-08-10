@@ -1,9 +1,19 @@
+// @flow
+import React from 'react';
+import type { Element } from 'react';
 import Header from './Header';
 
-const Layout = props =>
-  <div>
-    <Header />
-    {props.children}
-  </div>;
+type Props = {
+  children: Element<any>
+};
+
+const Layout = (props: Props) => {
+  return (
+    <div>
+      <Header />
+      {props.children}
+    </div>
+  );
+};
 
 export default Layout;
