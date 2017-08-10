@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "node server.js",
     "export": "next export",
-    "build": "next build",
-    "lint": "eslint **/*.{js,jsx} --quiet",
-    "format": "prettier --write --single-quote --print-width=120 --parser=flow --tab-width=2 \"src/**/*.{js,jsx}\" \"pages/**/*.{js,jsx}\" \"server.js\"",
+    "build": "npm run format && next build",
+    "lint": "eslint \"src/**/*.{js,jsx}\" \"pages/**/*.{js,jsx}\" \"server.js\" --quiet",
+    "format": "prettier --write --single-quote --print-width=120 --tab-width=2 \"src/**/*.{js,jsx}\" \"pages/**/*.{js,jsx}\" \"server.js\"",
     "flow": "node_modules/.bin/flow",
     "start": "NODE_ENV=production node server.js"
   },

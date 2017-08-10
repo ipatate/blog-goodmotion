@@ -22,9 +22,7 @@ app
     if (env !== 'production') {
       server.use(
         compress({
-          filter: contentType => {
-            return /text/i.test(contentType);
-          },
+          filter: contentType => /text/i.test(contentType),
           threshold: 2048,
           flush: zlib.Z_SYNC_FLUSH
         })

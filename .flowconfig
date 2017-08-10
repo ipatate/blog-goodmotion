@@ -6,7 +6,7 @@
 <PROJECT_ROOT>/pages/*
 <PROJECT_ROOT>/server.js
 [libs]
-<PROJECT_ROOT>/src/types/
+<PROJECT_ROOT>/flow-types/
 [options]
 esproposal.decorators=ignore
 module.ignore_non_literal_requires=true
