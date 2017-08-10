@@ -1,30 +1,32 @@
 const env = process.env.NODE_ENV || 'developpement';
-require('dotenv').config({path: `${__dirname}/config/.env.${env}`});
-const koa = require('koa');
+require('dotenv').config({ path: `${__dirname}/config/.env.${env}` });
+const Koa = require('koa');
 const Router = require('koa-router');
-const mobxReact = require('mobx-react')
+const mobxReact = require('mobx-react');
 const next = require('next');
 const compress = require('koa-compress');
+const zlib = require('zlib');
+
 const dev = env !== 'production';
-const app = next({ dir: './src', dev });
+const app = next({ dev });
 const handle = app.getRequestHandler();
 
-mobxReact.useStaticRendering(true)
+mobxReact.useStaticRendering(true);
 
 app
   .prepare()
   .then(() => {
-    const server = new koa();
+    const server = new Koa();
     const router = Router();
 
     if (env !== 'production') {
       server.use(
         compress({
-          filter: function(content_type) {
-            return /text/i.test(content_type);
+          filter: contentType => {
+            return /text/i.test(contentType);
           },
           threshold: 2048,
-          flush: require('zlib').Z_SYNC_FLUSH
+          flush: zlib.Z_SYNC_FLUSH
         })
       );
     }
@@ -34,19 +36,19 @@ app
       ctx.respond = false;
     });
 
-    server.use(async (ctx, next) => {
+    server.use(async (ctx, cb) => {
       ctx.res.statusCode = 200;
-      await next();
+      await cb();
     });
 
     server.use(router.routes()).use(router.allowedMethods());
     const port = process.env.PORT || 3000;
-    server.listen( port, err => {
+    server.listen(port, err => {
       if (err) throw err;
-      console.log(`ready on port ${port}`);
+      console.log(`ready on port ${port}`); // eslint-disable-line
     });
   })
   .catch(ex => {
-    console.error(ex.stack);
     process.exit(1);
+    throw ex.stack;
   });
