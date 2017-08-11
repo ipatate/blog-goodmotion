@@ -1,26 +1,12 @@
 // @flow
 import * as mobx from 'mobx';
-import fetch from 'isomorphic-unfetch';
-// import type {MobxStore} from '../flow-types/types';
-
-let store = null;
+import type { StoreType } from '../../flow-types/types';
 
 class Store {
   @mobx.observable posts = [];
-
-  @mobx.action
-  async syncPost() {
-    const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-    const data = await res.json();
-    this.posts = data;
-  }
+  @mobx.observable post = null;
+  @mobx.observable page = 1;
 }
 
-const initStore = () => {
-  if (store === null) {
-    store = new Store();
-  }
-  return store;
-};
-
-export default initStore;
+const store: StoreType = new Store();
+export default store;

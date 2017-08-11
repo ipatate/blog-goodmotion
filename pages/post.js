@@ -1,31 +1,34 @@
 // @flow
 import React from 'react';
 import { Provider } from 'mobx-react';
-// import DevTools from 'mobx-react-devtools';// eslint-disable-line
 import Store from '../src/stores/store';
-import { syncPosts } from '../src/actions/actions';
+import { findPost } from '../src/actions/actions';
 import Layout from '../src/components/Layout';
-import PostList from '../src/components/PostList';
+import Post from '../src/components/Post';
 import type { StoreType } from '../flow-types/types';
 
 type Props = {
-  posts: Array<any>
+  post: Object,
+  url: Object
 };
+
 class Index extends React.Component {
-  static async getInitialProps() {
-    // const isServer = !!req;
+  static async getInitialProps({ req, query }) {
+    const isServer = !!req;
     const store = Store;
-    if (store.posts.length < 1) {
-      await syncPosts();
+    const id = query.id;
+    if (id) {
+      await findPost(id);
     }
-    return { posts: store.posts };
+    return { post: store.post, isServer };
   }
   constructor(props: Props) {
     super(props);
     this.store = Store;
-    this.store.posts = props.posts;
-    if (this.store.posts.length < 1) {
-      syncPosts();
+    this.store.post = props.post;
+    const id = this.props.url.query.id;
+    if (id && Store.post === null) {
+      findPost(id);
     }
   }
   store: StoreType;
@@ -33,9 +36,7 @@ class Index extends React.Component {
     return (
       <Provider store={this.store}>
         <Layout>
-          <h1>Hello World</h1>
-          <PostList />
-          <style jsx global>{``}</style>
+          <Post {...this.props} />
         </Layout>
       </Provider>
     );

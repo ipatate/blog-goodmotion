@@ -9,12 +9,13 @@
     "build": "npm run format && next build",
     "lint": "eslint \"src/**/*.{js,jsx}\" \"pages/**/*.{js,jsx}\" \"server.js\" --quiet",
     "format": "prettier --write --single-quote --print-width=120 --tab-width=2 \"src/**/*.{js,jsx}\" \"pages/**/*.{js,jsx}\" \"server.js\"",
+    "clean": "npm run format && npm run lint",
     "flow": "node_modules/.bin/flow",
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "dotenv": "^4.0.0",
-    "isomorphic-unfetch": "^2.0.0",
+    "isomorphic-fetch": "^2.2.1",
     "koa": "^2.3.0",
     "koa-compress": "^2.0.0",
     "koa-router": "^7.2.1",
@@ -32,7 +33,7 @@
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-flow": "^6.23.0",
     "eslint": "3.19.0",
-    "eslint-config-airbnb": "15.0.1",
+    "eslint-config-airbnb": "^15.0.1",
     "eslint-config-prettier": "2.1.1",
     "eslint-config-react": "1.1.7",
     "eslint-loader": "1.7.1",
@@ -41,10 +42,11 @@
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "5.0.3",
     "eslint-plugin-prettier": "2.1.1",
-    "eslint-plugin-react": "7.0.1",
+    "eslint-plugin-react": "^7.0.1",
     "flow-bin": "^0.52.0",
     "flow-remove-types": "^1.2.1",
     "jest": "^20.0.4",
+    "mobx-react-devtools": "^4.2.15",
     "prettier": "^1.5.3"
   }
 }

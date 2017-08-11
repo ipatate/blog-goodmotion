@@ -1,5 +1,6 @@
 // @flow
-export type Store = {
-  syncPost: Function,
-  posts: Array<mixed>
+export type StoreType = {
+  posts: Array<Object>,
+  post: ?Object,
+  page: number
 };

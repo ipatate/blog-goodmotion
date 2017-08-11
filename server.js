@@ -29,6 +29,13 @@ app
       );
     }
 
+    router.get('/post/:id', ctx => {
+      const actualPage = '/post';
+      const queryParams = { id: ctx.params.id };
+      ctx.respond = false;
+      app.render(ctx.req, ctx.res, actualPage, queryParams);
+    });
+
     router.get('*', async ctx => {
       await handle(ctx.req, ctx.res);
       ctx.respond = false;
