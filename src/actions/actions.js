@@ -13,12 +13,14 @@ export const syncPosts = () =>
     });
 
 export const syncPost = (id: number) =>
-  fetch(`https://api.tvmaze.com/shows/${id}`).then(res => res.json()).then(data => {
-    Store.post = data;
-  })
-  .catch(e => {
-    throw e;
-  });
+  fetch(`https://api.tvmaze.com/shows/${id}`)
+    .then(res => res.json())
+    .then(data => {
+      Store.post = data;
+    })
+    .catch(e => {
+      throw e;
+    });
 
 export const findPostInPosts = (id: number) => Store.posts.find((post: Object) => +post.show.id === +id);
 

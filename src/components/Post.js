@@ -7,10 +7,7 @@ import type { StoreType } from '../../flow-types/types';
 type Props = {
   store: StoreType
 };
-
-@inject('store')
-@observer
-class Post extends React.Component {
+export class Post extends React.Component {
   static defaultProps = {
     store: Store
   };
@@ -28,8 +25,8 @@ class Post extends React.Component {
         </div>
       );
     }
-    return <div />;
+    return <div/>;
   }
 }
 
-export default Post;
+export default inject('store')(observer(Post));

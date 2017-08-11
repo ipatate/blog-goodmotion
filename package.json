@@ -12,7 +12,9 @@
     "format": "prettier --write --single-quote --print-width=120 --tab-width=2 \"src/**/*.{js,jsx}\" \"pages/**/*.{js,jsx}\" \"server.js\"",
     "clean": "npm run format && npm run lint",
     "flow": "node_modules/.bin/flow",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "babel-plugin-inline-dotenv": "^1.1.1",
@@ -30,6 +32,7 @@
     "react-dom": "^15.6.1"
   },
   "devDependencies": {
+    "@storybook/react": "^3.2.3",
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
