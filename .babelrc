@@ -5,6 +5,7 @@
   "plugins": [
     "transform-decorators-legacy",
     "transform-flow-strip-types",
+    ["styled-components", { "ssr": true, "displayName": true, "preprocess": false } ],
     ["inline-dotenv",{
         "path": "config/.env.public"
       }]
