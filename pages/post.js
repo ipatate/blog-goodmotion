@@ -18,7 +18,11 @@ class Index extends React.Component {
     const store = Store;
     const id = query.id;
     if (id) {
-      await findPost(id);
+      try {
+        await findPost(id);
+      } catch (error) {
+        throw error;
+      }
     }
     return { post: store.post, isServer };
   }
@@ -28,7 +32,11 @@ class Index extends React.Component {
     this.store.post = props.post;
     const id = this.props.url.query.id;
     if (id && Store.post === null) {
-      findPost(id);
+      try {
+        findPost(id);
+      } catch (error) {
+        throw error;
+      }
     }
   }
   store: StoreType;

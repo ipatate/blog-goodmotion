@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test syncPosts function syncPosts error 404 1`] = `[FetchError: invalid json response body at https://api.tvmaze.com/search/shows?q=girls&page=1 reason: Unexpected end of JSON input]`;
+
+exports[`test syncPosts function syncPosts error 500 1`] = `[FetchError: request to https://api.tvmaze.com/search/shows?q=girls&page=1 failed, reason: Error server]`;
+
+exports[`test syncPosts function syncPosts no error 1`] = `undefined`;

@@ -16,7 +16,11 @@ class Index extends React.Component {
     // const isServer = !!req;
     const store = Store;
     if (store.posts.length < 1) {
-      await syncPosts();
+      try {
+        await syncPosts();
+      } catch (error) {
+        throw error;
+      }
     }
     return { posts: store.posts };
   }
@@ -25,7 +29,11 @@ class Index extends React.Component {
     this.store = Store;
     this.store.posts = props.posts;
     if (this.store.posts.length < 1) {
-      syncPosts();
+      try {
+        syncPosts();
+      } catch (error) {
+        throw error;
+      }
     }
   }
   store: StoreType;
@@ -33,7 +41,9 @@ class Index extends React.Component {
     return (
       <Provider store={this.store}>
         <Layout>
-          <h1>Hello World</h1>
+          <h1>
+            {process.env.TEST}
+          </h1>
           <PostList />
           <style jsx global>{``}</style>
         </Layout>
