@@ -4,6 +4,17 @@
   ],
   "plugins": [
     "transform-decorators-legacy",
-    "transform-flow-strip-types"
-  ]
+    "transform-flow-strip-types",
+    ["inline-dotenv",{
+        "path": "config/.env.public"
+      }]
+  ],
+  "env": {
+    "test": {
+    },
+    "development": {
+    },
+    "production": {
+    }
+  }
 }

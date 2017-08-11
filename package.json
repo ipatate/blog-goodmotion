@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "test": "NODE_ENV=test jest",
     "dev": "node server.js",
     "export": "next export",
     "build": "npm run format && next build",
@@ -14,6 +15,8 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
+    "babel-plugin-inline-dotenv": "^1.1.1",
+    "babel-plugin-transform-inline-environment-variables": "^0.1.1",
     "dotenv": "^4.0.0",
     "isomorphic-fetch": "^2.2.1",
     "koa": "^2.3.0",
@@ -47,6 +50,7 @@
     "flow-remove-types": "^1.2.1",
     "jest": "^20.0.4",
     "mobx-react-devtools": "^4.2.15",
+    "nock": "^9.0.14",
     "prettier": "^1.5.3"
   }
 }
