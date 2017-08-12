@@ -1,12 +1,12 @@
 [ignore]
 <PROJECT_ROOT>/__tests__/.*
 .*node_modules/babel-plugin-flow-react-proptypes*.
+.*/node_modules/styled-components/.*
 [include]
 <PROJECT_ROOT>/src/*
 <PROJECT_ROOT>/pages/*
 <PROJECT_ROOT>/server.js
 [libs]
-<PROJECT_ROOT>/flow-types/
 [options]
 esproposal.decorators=ignore
 module.ignore_non_literal_requires=true

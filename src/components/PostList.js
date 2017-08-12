@@ -3,7 +3,11 @@ import React from 'react';
 import Link from 'next/link';
 import { inject, observer } from 'mobx-react';
 
-export const PostList = (props) => {
+type Props = {
+  store: StoreType
+};
+
+export const PostList = (props: Props) => {
   if (props.store && props.store.posts) {
     return (
       <div>

@@ -7,7 +7,6 @@ import Store from '../src/stores/store';
 import { syncPosts } from '../src/actions/actions';
 import Layout from '../src/components/Layout';
 import PostList from '../src/components/PostList';
-import type { StoreType } from '../flow-types/types';
 
 type Props = {
   posts: Array<any>

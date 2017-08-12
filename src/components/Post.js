@@ -2,7 +2,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import Store from '../../src/stores/store';
-import type { StoreType } from '../../flow-types/types';
 
 type Props = {
   store: StoreType

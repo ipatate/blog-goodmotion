@@ -5,7 +5,6 @@ import Store from '../src/stores/store';
 import { findPost } from '../src/actions/actions';
 import Layout from '../src/components/Layout';
 import Post from '../src/components/Post';
-import type { StoreType } from '../flow-types/types';
 
 type Props = {
   post: Object,
