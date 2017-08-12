@@ -19,7 +19,8 @@
   },
   "rules": {
     "react/prop-types": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "import/no-named-as-default": 0
   },
   "env": {
     "es6": true,

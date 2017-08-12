@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { Provider } from 'mobx-react';
 // import DevTools from 'mobx-react-devtools';// eslint-disable-line
 import styled from 'styled-components';
 import Store from '../src/stores/store';
@@ -13,8 +12,8 @@ type Props = {
 };
 
 const Title = styled.h1`
-	font-size: 1.5em;
-	text-align: center;
+  font-size: 1.5em;
+  text-align: center;
   color: palevioletred;
   display: flex;
 `;
@@ -47,15 +46,10 @@ class Index extends React.Component {
   store: StoreType;
   render() {
     return (
-      <Provider store={this.store}>
-        <Layout>
-          <Title>
-            Movies List
-          </Title>
-          <PostList />
-          <style jsx global>{``}</style>
-        </Layout>
-      </Provider>
+      <Layout>
+        <Title>Movies List</Title>
+        <PostList />
+      </Layout>
     );
   }
 }

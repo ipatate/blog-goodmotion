@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { Provider } from 'mobx-react';
 import Store from '../src/stores/store';
 import { findPost } from '../src/actions/actions';
 import Layout from '../src/components/Layout';
@@ -41,11 +40,9 @@ class Index extends React.Component {
   store: StoreType;
   render() {
     return (
-      <Provider store={this.store}>
-        <Layout>
-          <Post {...this.props} />
-        </Layout>
-      </Provider>
+      <Layout>
+        <Post {...this.props} />
+      </Layout>
     );
   }
 }

@@ -24,7 +24,7 @@ export class Post extends React.Component {
         </div>
       );
     }
-    return <div/>;
+    return <div />;
   }
 }
 
