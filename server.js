@@ -6,12 +6,20 @@ const mobxReact = require('mobx-react');
 const next = require('next');
 const compress = require('koa-compress');
 const zlib = require('zlib');
+const fs = require('fs');
+const { parse } = require('url')
+const { join } = require('path')
 
 const dev = env !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
 mobxReact.useStaticRendering(true);
+
+// read static folder
+const publicFolder = './static/';
+const  staticPublicFolder = fs.readdirSync(publicFolder);
+const rootStaticFiles = staticPublicFolder.map(file => `/${file}`);
 
 app
   .prepare()
@@ -35,10 +43,16 @@ app
       ctx.respond = false;
       app.render(ctx.req, ctx.res, actualPage, queryParams);
     });
-
     router.get('*', async ctx => {
-      await handle(ctx.req, ctx.res);
-      ctx.respond = false;
+      const parsedUrl = parse(ctx.req.url, true)
+      // render static file or page
+      if (rootStaticFiles.indexOf(parsedUrl.pathname) > -1) {
+        const path = join(__dirname, 'static', parsedUrl.pathname)
+        await app.serveStatic(ctx.req, ctx.res, path)
+      } else {
+        await handle(ctx.req, ctx.res);
+        ctx.respond = false;
+      }
     });
 
     server.use(async (ctx, cb) => {
