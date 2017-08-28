@@ -1,14 +1,16 @@
 const env = process.env.NODE_ENV || 'developpement';
 require('dotenv').config({ path: `${__dirname}/config/.env.${env}` });
 const Koa = require('koa');
+const https = require('https');
+const getDevelopmentCertificate = require('devcert').default;
 const Router = require('koa-router');
 const mobxReact = require('mobx-react');
 const next = require('next');
 const compress = require('koa-compress');
 const zlib = require('zlib');
 const fs = require('fs');
-const { parse } = require('url')
-const { join } = require('path')
+const { parse } = require('url');
+const { join } = require('path');
 
 const dev = env !== 'production';
 const app = next({ dev });
@@ -18,7 +20,7 @@ mobxReact.useStaticRendering(true);
 
 // read static folder
 const publicFolder = './static/';
-const  staticPublicFolder = fs.readdirSync(publicFolder);
+const staticPublicFolder = fs.readdirSync(publicFolder);
 const rootStaticFiles = staticPublicFolder.map(file => `/${file}`);
 
 app
@@ -32,8 +34,8 @@ app
         compress({
           filter: contentType => /text/i.test(contentType),
           threshold: 2048,
-          flush: zlib.Z_SYNC_FLUSH
-        })
+          flush: zlib.Z_SYNC_FLUSH,
+        }),
       );
     }
 
@@ -44,11 +46,11 @@ app
       app.render(ctx.req, ctx.res, actualPage, queryParams);
     });
     router.get('*', async ctx => {
-      const parsedUrl = parse(ctx.req.url, true)
+      const parsedUrl = parse(ctx.req.url, true);
       // render static file or page
       if (rootStaticFiles.indexOf(parsedUrl.pathname) > -1) {
-        const path = join(__dirname, 'static', parsedUrl.pathname)
-        await app.serveStatic(ctx.req, ctx.res, path)
+        const path = join(__dirname, 'static', parsedUrl.pathname);
+        await app.serveStatic(ctx.req, ctx.res, path);
       } else {
         await handle(ctx.req, ctx.res);
         ctx.respond = false;
@@ -62,10 +64,17 @@ app
 
     server.use(router.routes()).use(router.allowedMethods());
     const port = process.env.PORT || 3000;
-    server.listen(port, err => {
-      if (err) throw err;
-      console.log(`ready on port ${port}`); // eslint-disable-line
-    });
+
+    if (dev) {
+      getDevelopmentCertificate('blog-next', { installCertutil: true }).then(ssl => {
+        https.createServer(ssl, server.callback()).listen(port, () => console.log(`ready on ssl: port ${port}`));
+      });
+    } else {
+      server.listen(port, err => {
+        if (err) throw err;
+        console.log(`ready on port ${port}`); // eslint-disable-line
+      });
+    }
   })
   .catch(ex => {
     process.exit(1);

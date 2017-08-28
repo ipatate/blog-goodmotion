@@ -9,7 +9,7 @@ import PostList from '../src/components/PostList';
 import Reorder from '../static/svg/reorder.svg';
 
 type Props = {
-  posts: Array<any>
+  posts: Array<any>,
 };
 
 const Title = styled.h1`
@@ -48,7 +48,9 @@ class Index extends React.Component {
   render() {
     return (
       <Layout>
-        <Title>Movies List <Reorder/></Title>
+        <Title>
+          Movies List <Reorder />
+        </Title>
         <PostList />
       </Layout>
     );

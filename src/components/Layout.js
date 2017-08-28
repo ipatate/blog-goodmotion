@@ -11,7 +11,7 @@ import theme from '../styles/theme';
 
 class Layout extends React.Component {
   static defaultProps = {
-    title: 'This is the default title'
+    title: 'This is the default title',
   };
   constructor(props: { children: Element<any>, title?: string }) {
     super(props);
